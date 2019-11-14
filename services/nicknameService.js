@@ -22,7 +22,7 @@ const nickService = () => {
     const getNickByName = async (nick) => {
         return await globalTryCatch(async () => {
             const result = await db.Nickname.find({ nickname: nick });
-            if(result == null) {
+            if(result == null || result.length == 0) {
                 return {
                     status: 404,
                     body: "Nickname was not found!"
@@ -54,6 +54,25 @@ const nickService = () => {
         })
     };
 
+    const deleteNickByName = async (nick) => {
+        return await globalTryCatch(async () => {
+            const result = await db.Nickname.find({ nickname: nick });
+            if(result == null || result.length == 0) {
+                return {
+                    status: 204,
+                    body: "No such nickname found!"
+                }
+            }
+            
+            const deleted = await db.Nickname.findOneAndDelete({ nickname: nick });
+            
+            return {
+                status: 204,
+                body: "Deleted!"
+            };
+        });
+    };
+
     const getRandomNick = async () => {
         return await globalTryCatch(async () => {
             const allNicks = await db.Nickname.find({});
@@ -77,6 +96,7 @@ const nickService = () => {
         getAllNicks,
         getNickByName,
         createNick,
+        deleteNickByName,
         getRandomNick
     };
 };
