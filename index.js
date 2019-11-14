@@ -15,13 +15,13 @@ app.get('/', async function(req, res) {
 //http://localhost:3000/api/nicknames [GET]
 app.get('/api/nicknames', async function(req, res) {
     const result = await nicknameService.getAllNicks();
+    res.header("Access-Control-Allow-Origin", "*");
     return res.status(result.status).json(result.body);
 });
 
 //http://localhost:3000/api/nicknames/random [GET]
 app.get('/api/nicknames/random', async function(req, res) {
     const result = await nicknameService.getRandomNick();
-    res.header("Access-Control-Allow-Origin", "*");
     return res.status(result.status).json(result.body);
 });
 

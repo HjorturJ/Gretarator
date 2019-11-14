@@ -22,20 +22,32 @@
         </div>
 
         <script>
-            function getRandomName() {
+            var nicknames;
+            function getAllNicks() {
                 var xhttp = new XMLHttpRequest();
-                xhttp.open("GET", "https://gretarnator-api.herokuapp.com/api/nicknames/random", true);
+                xhttp.open("GET", "http://localhost:3000/api/nicknames", true);
                 xhttp.setRequestHeader('Ping-Other', 'pingpong');
                 xhttp.setRequestHeader('Content-Type', 'application/xml');
                 xhttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
-                        console.log(this.responseText);
-                        var nick = JSON.parse(this.responseText);
-                        console.log(nick);
-                        document.getElementById("random").innerText = nick.nickname;
+                        nicknames = JSON.parse(this.responseText);
                     }
                 };
                 xhttp.send();
+            };
+
+            //Cache full nickname list locally so we dont make the random request as fast as the users can press the button lol
+            getAllNicks(); 
+
+            var lastNick = "Grétar";
+            function getRandomName() {
+                var newNick = nicknames[Math.floor(Math.random()*nicknames.length)].nickname;
+                if(newNick == lastNick) {
+                    //Twice as less likely to get the same nickname twice, fuck it, too lazy to circular index loop
+                    newNick = nicknames[Math.floor(Math.random()*nicknames.length)].nickname;
+                }
+                document.getElementById("random").innerText = newNick;
+                lastNick = newNick;
             }
         </script>
     </body>
