@@ -5,9 +5,11 @@ Open API for Grétars nicknames.
 
 https://gretarnator-api.herokuapp.com/api/nicknames  -> [GET] List of all nicknames.
 
-https://gretarnator-api.herokuapp.com/api/nicknames  -> [POST] Add a new nickname to the list.
+https://gretarnator-api.herokuapp.com/api/nicknames/random  -> [GET] Single random nickname.
 
 https://gretarnator-api.herokuapp.com/api/nicknames/:nickname  -> [DELETE] Delete a nickname by name.
+
+https://gretarnator-api.herokuapp.com/api/nicknames  -> [POST] Add a new nickname to the list.
 
 ## Input model:
 
