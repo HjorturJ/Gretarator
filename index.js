@@ -3,8 +3,14 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 3000;
 const nicknameService = require('./services/nicknameService');
+const path = require('path');
 
 app.use(bodyParser.json());
+
+//HTML random nickname site
+app.get('/', async function(req, res) {
+    return res.sendFile(path.join(__dirname+'/index.html'));
+});
 
 //http://localhost:3000/api/nicknames [GET]
 app.get('/api/nicknames', async function(req, res) {
@@ -15,6 +21,7 @@ app.get('/api/nicknames', async function(req, res) {
 //http://localhost:3000/api/nicknames/random [GET]
 app.get('/api/nicknames/random', async function(req, res) {
     const result = await nicknameService.getRandomNick();
+    res.header("Access-Control-Allow-Origin", "*");
     return res.status(result.status).json(result.body);
 });
 

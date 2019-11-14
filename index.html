@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Gretarnator</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div style="width:800px; margin:0 auto;">
+            <h1 id="random">Grétar</h1>
+            <button type="button" onclick="getRandomName()">Random Nickname!</button>
+        </div>
+
+        <script>
+            function getRandomName() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", "https://gretarnator-api.herokuapp.com/api/nicknames/random", true);
+                xhttp.setRequestHeader('Ping-Other', 'pingpong');
+                xhttp.setRequestHeader('Content-Type', 'application/xml');
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log(this.responseText);
+                        var nick = JSON.parse(this.responseText);
+                        console.log(nick);
+                        document.getElementById("random").innerText = nick.nickname;
+                    }
+                };
+                xhttp.send();
+            }
+        </script>
+    </body>
+</html>
