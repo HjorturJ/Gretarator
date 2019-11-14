@@ -25,7 +25,7 @@
             var nicknames;
             function getAllNicks() {
                 var xhttp = new XMLHttpRequest();
-                xhttp.open("GET", "http://localhost:3000/api/nicknames", true);
+                xhttp.open("GET", "https://gretarnator-api.herokuapp.com/api/nicknames", true);
                 xhttp.setRequestHeader('Ping-Other', 'pingpong');
                 xhttp.setRequestHeader('Content-Type', 'application/xml');
                 xhttp.onreadystatechange = function() {
