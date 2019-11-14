@@ -3,6 +3,8 @@ Open API for Grétars nicknames.
 
 ## Routes:
 
+https://gretarnator-api.herokuapp.com/ -> Random nickname front page!
+
 https://gretarnator-api.herokuapp.com/api/nicknames  -> [GET] List of all nicknames.
 
 https://gretarnator-api.herokuapp.com/api/nicknames/random  -> [GET] Single random nickname.
