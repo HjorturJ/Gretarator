@@ -25,6 +25,13 @@ app.get('/api/nicknames/:nick', async function(req, res) {
     return res.status(result.status).json(result.body);
 });
 
+//http://localhost:3000/api/nicknames/:nick [DELETE]
+app.delete('/api/nicknames/:nick', async function(req, res) {
+    const nick = req.params.nick;
+    const result = await nicknameService.deleteNickByName(nick);
+    return res.status(result.status).json(result.body);
+});
+
 //http://localhost:3000/api/nicknames [POST]
 app.post('/api/nicknames', async function(req, res) {
     const result = await nicknameService.createNick(req.body);
