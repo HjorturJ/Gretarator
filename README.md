@@ -14,7 +14,9 @@ https://gretarnator-api.herokuapp.com/api/nicknames/:nickname  -> [DELETE] Delet
 {
 
   "nickname" : "example nickname",
+  
   "author" : "your name",
+  
   "description" : "whatever you want to say about this nickname"
   
 }
