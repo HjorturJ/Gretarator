@@ -18,6 +18,7 @@
     <body>
         <div class="center">
             <h1 id="random" class="huge">Grétar</h1>
+            <p id="descr"></p>
             <button type="button" onclick="getRandomName()">Random Nickname!</button>
         </div>
 
@@ -41,13 +42,19 @@
 
             var lastNick = "Grétar";
             function getRandomName() {
-                var newNick = nicknames[Math.floor(Math.random()*nicknames.length)].nickname;
-                if(newNick == lastNick) {
+                var newNick = nicknames[Math.floor(Math.random()*nicknames.length)];
+                if(newNick.nickname == lastNick) {
                     //Twice as less likely to get the same nickname twice, fuck it, too lazy to circular index loop
-                    newNick = nicknames[Math.floor(Math.random()*nicknames.length)].nickname;
+                    newNick = nicknames[Math.floor(Math.random()*nicknames.length)];
                 }
                 document.getElementById("random").innerText = newNick;
-                lastNick = newNick;
+                if(newNick.description) {
+                    document.getElementById("descr").innerText = newNick.description;
+                }
+                else {
+                    document.getElementById("descr").innerText = "";
+                }
+                lastNick = newNick.nickname;
             }
         </script>
     </body>
