@@ -47,7 +47,7 @@
                     //Twice as less likely to get the same nickname twice, fuck it, too lazy to circular index loop
                     newNick = nicknames[Math.floor(Math.random()*nicknames.length)];
                 }
-                document.getElementById("random").innerText = newNick;
+                document.getElementById("random").innerText = newNick.nickname;
                 if(newNick.description) {
                     document.getElementById("descr").innerText = newNick.description;
                 }
