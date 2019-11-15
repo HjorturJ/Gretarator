@@ -33,7 +33,7 @@ app.get('/api/nicknames/:nick', async function(req, res) {
 });
 
 //http://localhost:3000/api/nicknames/:nick [PUT]
-app.get('/api/nicknames/:nick', async function(req, res) {
+app.put('/api/nicknames/:nick', async function(req, res) {
     const nick = req.params.nick;
     const nickInput = req.body;
     const result = await nicknameService.getNickByName(nick, nickInput);
