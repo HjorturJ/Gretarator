@@ -32,6 +32,14 @@ app.get('/api/nicknames/:nick', async function(req, res) {
     return res.status(result.status).json(result.body);
 });
 
+//http://localhost:3000/api/nicknames/:nick [PUT]
+app.get('/api/nicknames/:nick', async function(req, res) {
+    const nick = req.params.nick;
+    const nickInput = req.body;
+    const result = await nicknameService.getNickByName(nick, nickInput);
+    return res.status(result.status).json(result.body);
+});
+
 //http://localhost:3000/api/nicknames/:nick [DELETE]
 app.delete('/api/nicknames/:nick', async function(req, res) {
     const nick = req.params.nick;

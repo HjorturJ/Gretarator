@@ -54,6 +54,32 @@ const nickService = () => {
         })
     };
 
+    const updateNickByName = async (nick, nickInput) => {
+        return await globalTryCatch(async () => {
+            const oldNick = await db.Nickname.find({ nickname: nick });
+            if(oldNick == null || oldNick.length == 0) {
+                return {
+                    status: 404,
+                    body: "Nickname was not found!"
+                }
+            }
+
+            if(nickInput[nickname] === undefined) {
+                return {
+                    status: 400,
+                    body: "You must include a nickname!"
+                }
+            }
+
+            db.Nickname.updateOne({ nickname: nick }, nickInput)
+
+            return {
+                status: 204,
+                body: nickInput
+            };
+        });
+    };
+
     const deleteNickByName = async (nick) => {
         return await globalTryCatch(async () => {
             const result = await db.Nickname.find({ nickname: nick });
