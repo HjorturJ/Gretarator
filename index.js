@@ -34,9 +34,10 @@ app.get('/api/nicknames/:nick', async function(req, res) {
 
 //http://localhost:3000/api/nicknames/:nick [PUT]
 app.put('/api/nicknames/:nick', async function(req, res) {
-    const nick = req.params.nick;
+    //Parameters in the URL are in UTF-8 unicode format that we need to decode.
+    const nick = decodeURIComponent(escape(req.params.nick));
     const nickInput = req.body;
-    const result = await nicknameService.getNickByName(nick, nickInput);
+    const result = await nicknameService.updateNickByName(nick, nickInput);
     return res.status(result.status).json(result.body);
 });
 

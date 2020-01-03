@@ -64,17 +64,29 @@ const nickService = () => {
                 }
             }
 
-            if(nickInput[nickname] === undefined) {
+            if(nickInput["nickname"] === undefined) {
                 return {
                     status: 400,
                     body: "You must include a nickname!"
                 }
             }
 
-            db.Nickname.updateOne({ nickname: nick }, nickInput)
+            await db.Nickname.updateOne(
+                {
+                    nickname: nick 
+                },
+                { 
+                    $set: 
+                    { 
+                        nickname: nickInput.nickname || oldNick.nickname,
+                        author: nickInput.author || oldNick.author,
+                        description: nickInput.description || oldNick.description,
+                    } 
+                }
+            );
 
             return {
-                status: 204,
+                status: 201,
                 body: nickInput
             };
         });
@@ -122,6 +134,7 @@ const nickService = () => {
         getAllNicks,
         getNickByName,
         createNick,
+        updateNickByName,
         deleteNickByName,
         getRandomNick
     };
