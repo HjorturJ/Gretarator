@@ -27,27 +27,16 @@
         </div>
 
         <script>
-            //TODO: Change this ugly stuff to a fetch async await block
-            var nicknames;
-            function getAllNicks() {
-                var xhttp = new XMLHttpRequest();
-                xhttp.open("GET", "/api/nicknames", true);
-                xhttp.setRequestHeader('Ping-Other', 'pingpong');
-                xhttp.setRequestHeader('Content-Type', 'application/xml');
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        nicknames = JSON.parse(this.responseText);
-                    }
-                };
-                xhttp.send();
-            };
+            let nicknames;
+            //Cache full nickname list locally so we dont make individual api requests every time the user clicks the button
+            (async function getAllNicks() {
+                let response = await fetch('/api/nicknames');
+                nicknames = await response.json()
+            })();
 
-            //Cache full nickname list locally so we dont make the random request as fast as the users can press the button lol
-            getAllNicks(); 
-
-            var lastNick = "Grétar";
+            let lastNick = "Grétar";
             function getRandomName() {
-                var newNick = nicknames[Math.floor(Math.random()*nicknames.length)];
+                let newNick = nicknames[Math.floor(Math.random()*nicknames.length)];
                 if(newNick.nickname == lastNick) {
                     //Twice as less likely to get the same nickname twice, fuck it, too lazy to circular index loop
                     newNick = nicknames[Math.floor(Math.random()*nicknames.length)];
