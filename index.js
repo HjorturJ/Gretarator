@@ -7,6 +7,11 @@ const path = require('path');
 
 app.use(bodyParser.json());
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+});
+
 //HTML random nickname site
 app.get('/', async function(req, res) {
     return res.sendFile(path.join(__dirname+'/index.html'));
@@ -15,7 +20,6 @@ app.get('/', async function(req, res) {
 //http://localhost:3000/api/nicknames [GET]
 app.get('/api/nicknames', async function(req, res) {
     const result = await nicknameService.getAllNicks();
-    res.header("Access-Control-Allow-Origin", "*");
     return res.status(result.status).json(result.body);
 });
 
