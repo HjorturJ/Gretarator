@@ -1,5 +1,6 @@
 # Gretarnator
 Open API for Grétars nicknames.
+Just a heads up: This project is currently just hosted on Heroku, so it might take some time for the project to "spin up" if it hasn't been visited in a while.
 
 ## Routes:
 
